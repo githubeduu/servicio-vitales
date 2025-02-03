@@ -1,7 +1,6 @@
 package com.example.servicio_vitales.services;
 
 import java.util.List;
-import java.util.Map;
 
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
