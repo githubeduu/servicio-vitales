@@ -1,14 +1,8 @@
 package com.example.servicio_vitales.controller;
 
-import com.example.servicio_vitales.DTO.*;
-import com.example.servicio_vitales.model.SignosVitales;
+import com.example.servicio_vitales.services.KafkaProducerService;
 import com.example.servicio_vitales.services.RabbitMQSender;
 import com.example.servicio_vitales.services.VitalesService;
-
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Random;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
@@ -19,28 +13,31 @@ import org.springframework.web.bind.annotation.*;
 public class VitalesController {
 
     private final VitalesService signoVitalesService;
+    
+    private final KafkaProducerService kafkaProducerService;
 
-    public VitalesController(VitalesService signoVitalesService) {
+    public VitalesController(VitalesService signoVitalesService, KafkaProducerService kafkaProducerService) {
         this.signoVitalesService = signoVitalesService;
+        this.kafkaProducerService = kafkaProducerService;
     }
 
+    @Scheduled(fixedRate = 1000) // Cada 5 segundos
+    public void enviarResumenSenalesVitales() {
 
-    @Autowired
-    private RabbitMQSender rabbitMQSender;
-
-    @PostMapping("/informe")
-    public String enviarInforme(@RequestBody VitalesDTO vitalesDTO) {
-        rabbitMQSender.enviarInforme(vitalesDTO);
-        return "Mensaje enviado a la cola!";
+        kafkaProducerService.sendMessage();
     }
 
+   //SE MANTIENE ESTE CODIGO, POR SI LO SOLICITAN EN EL EXAMEN
+    // @Autowired
+    // private RabbitMQSender rabbitMQSender;
 
     
+   // @Scheduled(fixedRate = 1000) // Cada 5 segundos
+    // public void enviarResumenSenalesVitales() {
+    //     List<SignosVitales> signosVitales = signoVitalesService.getAllSignosVitales();
 
-    @Scheduled(fixedRate = 20000) // Cada 20 segundos
-    public void enviarResumenSenalesVitales() {
-        List<SignosVitales> signosVitales = signoVitalesService.getAllSignosVitales();
+    //     rabbitMQSender.enviarInformeCron(signosVitales);
+    // }
 
-        rabbitMQSender.enviarInformeCron(signosVitales);
-    }
+    
 }
