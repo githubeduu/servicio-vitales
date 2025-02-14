@@ -1,10 +1,8 @@
 package com.example.servicio_vitales.controller;
 
 import com.example.servicio_vitales.services.KafkaProducerService;
-import com.example.servicio_vitales.services.RabbitMQSender;
 import com.example.servicio_vitales.services.VitalesService;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.web.bind.annotation.*;
 

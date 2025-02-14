@@ -28,7 +28,7 @@ public class KafkaProducerService {
         SeñalesVitalesDTO vitalSign = new SeñalesVitalesDTO(
                 1,
                 getRandomHeartRate(),
-                getRandomTemperature(),
+                getRandomBodyTemperature(),
                 getRandomOxygenSaturation()
         );
 
@@ -45,7 +45,7 @@ public class KafkaProducerService {
         return 60 + random.nextInt(41); // 60 - 100 bpm - Frecuencia Cardiaca
     }
 
-    private double getRandomTemperature() {
+    private double getRandomBodyTemperature() {
         return 36.1 + random.nextDouble() * 1.1; // 36.1 - 37.2 °C - Temperatura Corporal
     }
 

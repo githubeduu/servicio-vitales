@@ -12,17 +12,17 @@ public class SeñalesVitalesDTO {
     @JsonProperty("heartRate")
     private int heartRate;
     
-    @JsonProperty("temperature")
-    private double temperature;
+    @JsonProperty("bodyTemperature")
+    private double bodyTemperature;
     
-    @JsonProperty("oxygenSaturation")
-    private int oxygenSaturation;
+    @JsonProperty("bloodPressure")
+    private int bloodPressure;
 
-    public SeñalesVitalesDTO(int idPaciente, int heartRate, double temperature, int oxygenSaturation) {
+    public SeñalesVitalesDTO(int idPaciente, int heartRate, double bodyTemperature, int bloodPressure) {
         this.idPaciente = idPaciente;
         this.heartRate = heartRate;
-        this.temperature = temperature;
-        this.oxygenSaturation = oxygenSaturation;
+        this.bodyTemperature = bodyTemperature;
+        this.bloodPressure = bloodPressure;
     }
 
     
@@ -32,11 +32,11 @@ public class SeñalesVitalesDTO {
     public int getHeartRate() { return heartRate; }
     public void setHeartRate(int heartRate) { this.heartRate = heartRate; }
 
-    public double getTemperature() { return temperature; }
-    public void setTemperature(double temperature) { this.temperature = temperature; }
+    public double getBodyTemperature() { return bodyTemperature; }
+    public void setBodyTemperature(double bodyTemperature) { this.bodyTemperature = bodyTemperature; }
 
-    public int getOxygenSaturation() { return oxygenSaturation; }
-    public void setOxygenSaturation(int oxygenSaturation) { this.oxygenSaturation = oxygenSaturation; }
+    public int getBloodPressure() { return bloodPressure; }
+    public void setBloodPressure(int bloodPressure) { this.bloodPressure = bloodPressure; }
 
     public String toJson() {
         ObjectMapper objectMapper = new ObjectMapper();
